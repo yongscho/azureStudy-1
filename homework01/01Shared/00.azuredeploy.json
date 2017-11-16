@@ -7,7 +7,8 @@
         }
     },
     "variables": {
-        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/master/homework01/"
+        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/master/homework01/01Shared/",
+        "adminUserId" : "minsoojo"
     },
     "resources": [
         {

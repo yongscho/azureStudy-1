@@ -6,28 +6,24 @@ IFS=$'\n\t'
 # -o: prevents errors in a pipeline from being masked
 # IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
 
-usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -n <deploymentName> -l <resourceGroupLocation>" 1>&2; exit 1; }
+usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> -k <sshKeyData>" 1>&2; exit 1; }
 
 declare subscriptionId="7b13dc94-2b54-4cdf-a247-bbdebdb97f4f"
 declare resourceGroupName=""
 declare deploymentName=""
-declare resourceGroupLocation="koreacentral"
 declare sshKeyData=""
 
 # Initialize parameters specified from command line
-while getopts ":i:g:n:l:" arg; do
+while getopts ":g:n:k:" arg; do
     case "${arg}" in
-        i)
-            subscriptionId=${OPTARG}
-            ;;
         g)
             resourceGroupName=${OPTARG}
             ;;
         n)
             deploymentName=${OPTARG}
             ;;
-        l)
-            resourceGroupLocation=${OPTARG}
+        k)
+            sshKeyData=${OPTARG}
             ;;
         esac
 done
@@ -51,20 +47,8 @@ if [[ -z "$deploymentName" ]]; then
     read deploymentName
 fi
 
-if [[ -z "$resourceGroupLocation" ]]; then
-    echo "Enter a location below to create a new resource group else skip this"
-    echo "ResourceGroupLocation:"
-    read resourceGroupLocation
-fi
-
-if [[ -z "$sshKeyData" ]]; then
-    echo "Enter sshkeydata string"
-    echo "sshkeydatastring:"
-    read sshKeyData
-fi
-
 #templateFile Path - template file to be used
-templateFilePath="06.vm.json"
+templateFilePath="00.azuredeploy.json"
 
 if [ ! -f "$templateFilePath" ]; then
     echo "$templateFilePath not found"
@@ -72,15 +56,15 @@ if [ ! -f "$templateFilePath" ]; then
 fi
 
 #parameter file path
-parametersFilePath="06.vm.parameters.json"
+parametersFilePath="00.azuredeploy.parameters.json"
 
 if [ ! -f "$parametersFilePath" ]; then
     echo "$parametersFilePath not found"
     exit 1
 fi
 
-if [ -z "$subscriptionId" ] || [ -z "$resourceGroupName" ] || [ -z "$deploymentName" ]; then
-    echo "Either one of subscriptionId, resourceGroupName, deploymentName is empty"
+if [ -z "$resourceGroupName" ] || [ -z "$sshKeyData" ]; then
+    echo "Either one of resourceGroupName, sshKeyData is empty"
     usage
 fi
 

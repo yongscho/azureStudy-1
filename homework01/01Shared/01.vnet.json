@@ -4,6 +4,9 @@
     "parameters": {
         "vnet_name": {
             "type": "string"
+        },
+        "ip_amount": {
+            "type": "int"
         }
     },
     "variables": {},
@@ -206,7 +209,7 @@
             },
             "copy": {
                 "name": "ipcopy",
-                "count" : 3
+                "count" : "[parameters('ip_amount')]"
             },
             "dependsOn": []
         }
