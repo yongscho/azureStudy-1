@@ -23,7 +23,7 @@
             "type": "string"
         },
         "os_disk_size" : {
-            "defaultValue": 10,
+            "defaultValue": 30,
             "type": "int"
         },
         "adminUserId" : {
