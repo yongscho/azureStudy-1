@@ -6,23 +6,20 @@ IFS=$'\n\t'
 # -o: prevents errors in a pipeline from being masked
 # IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
 
-usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> " 1>&2; exit 1; }
+usage() { echo "Usage: $0 -g <resourceGroupName> -n deploymentName" 1>&2; exit 1; }
 
 declare subscriptionId="7b13dc94-2b54-4cdf-a247-bbdebdb97f4f"
 declare resourceGroupName=""
 declare deploymentName=""
 
 # Initialize parameters specified from command line
-while getopts ":g:n:" arg; do
+while getopts ":g:" arg; do
     case "${arg}" in
         g)
             resourceGroupName=${OPTARG}
             ;;
         n)
             deploymentName=${OPTARG}
-            ;;
-        k)
-            sshKeyData=${OPTARG}
             ;;
         esac
 done
@@ -93,7 +90,7 @@ fi
 echo "Starting deployment..."
 (
     set -x
-    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath --parameters sshKeyData=$sshKeyData
+    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath
 )
 
 if [ $?  == 0 ];
