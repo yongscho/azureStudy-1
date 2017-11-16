@@ -89,7 +89,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[reference(concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), 'Microsoft.Network/networkInterfaces', parameters('nic_name')))]"
+                            "id": "[reference(concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), '/providers/Microsoft.Network/networkInterfaces/', parameters('nic_name')))]"
                         }
                     ]
                 }
