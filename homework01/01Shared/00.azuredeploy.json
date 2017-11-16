@@ -4,11 +4,13 @@
     "parameters": {
         "vnet_name": {
             "type": "string"
-        }
+        },
+        "ip_amount": {
+          "type": "int"
+      }
     },
     "variables": {
-        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/master/homework01/01Shared/",
-        "adminUserId" : "minsoojo"
+        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/master/homework01/01Shared/"
     },
     "resources": [
         {
@@ -22,7 +24,8 @@
                 "contentVersion": "1.0.0.0"
               }, 
               "parameters": { 
-                "vnet_name":{"value": "[parameters('vnet_name')]"} 
+                "vnet_name":{"value": "[parameters('vnet_name')]"},
+                "ip_amount":{"value": "[parameters('ip_amount')]"}
               } 
             }
         },

@@ -39,7 +39,10 @@
             "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+        "netRGName":"minschoNetRG",
+        "subscriptionId":"[subscription().subscriptionId]"
+    },
     "resources": [
         {
             "comments": "테스트용",
@@ -86,7 +89,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic_name'))]"
+                            "id": "[reference(concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), 'Microsoft.Network/networkInterfaces', parameters('nic_name')))]"
                         }
                     ]
                 }
