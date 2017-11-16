@@ -6,16 +6,18 @@
             "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/master/homework01/"
+    },
     "resources": [
         {
             "apiVersion": "2017-05-10", 
-            "name": "linkedTemplate", 
+            "name": "minschoNet01", 
             "type": "Microsoft.Resources/deployments", 
             "properties": { 
               "mode": "Incremental", 
               "templateLink": {
-                "uri": "https://www.contoso.com/AzureTemplates/newStorageAccount.json",
+                "uri": "[concat(variables('repoUri'),'01.vnet.json')]",
                 "contentVersion": "1.0.0.0"
               }, 
               "parameters": { 

@@ -194,7 +194,7 @@
         {
             "comments": "테스트용",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[concat('publicip-', copyIndex(),'-', uniqueString(resourceGroup().id))]",
+            "name": "[concat('ip', copyIndex(),'-', uniqueString(resourceGroup().id))]",
             "apiVersion": "2017-06-01",
             "location": "[resourceGroup().location]",
             "tags": {},
