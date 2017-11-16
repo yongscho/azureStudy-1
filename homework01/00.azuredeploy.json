@@ -24,6 +24,69 @@
                 "vnet_name":{"value": "[parameters('vnet_name')]"} 
               } 
             }
+        },
+        {
+            "apiVersion": "2017-05-10", 
+            "name": "vm0nic", 
+            "type": "Microsoft.Resources/deployments", 
+            "properties": { 
+              "mode": "Incremental", 
+              "templateLink": {
+                "uri": "[concat(variables('repoUri'),'02.nic.json')]",
+                "contentVersion": "1.0.0.0"
+              }, 
+              "parameters": { 
+                "vnet_name":{"value": "[parameters('vnet_name')]"},
+                "nic_name":{"value": "vm0nic"},
+                "ip_name":{"value": "[concat('ip0-',uniqueString(resourceGroup().id))]"},
+                "subnet_name":{"value":"testSubnet01"}
+              } 
+            },
+            "dependsOn": [
+                "minschoNet01"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10", 
+            "name": "vm1nic", 
+            "type": "Microsoft.Resources/deployments", 
+            "properties": { 
+              "mode": "Incremental", 
+              "templateLink": {
+                "uri": "[concat(variables('repoUri'),'02.nic.json')]",
+                "contentVersion": "1.0.0.0"
+              }, 
+              "parameters": { 
+                "vnet_name":{"value": "[parameters('vnet_name')]"},
+                "nic_name":{"value": "vm1nic"},
+                "ip_name":{"value": "[concat('ip1-',uniqueString(resourceGroup().id))]"},
+                "subnet_name":{"value":"devDBSubnet01"}
+              } 
+            },
+            "dependsOn": [
+                "minschoNet01"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10", 
+            "name": "vm2nic", 
+            "type": "Microsoft.Resources/deployments", 
+            "properties": { 
+              "mode": "Incremental", 
+              "templateLink": {
+                "uri": "[concat(variables('repoUri'),'02.nic.json')]",
+                "contentVersion": "1.0.0.0"
+              }, 
+              "parameters": { 
+                "vnet_name":{"value": "[parameters('vnet_name')]"},
+                "nic_name":{"value": "vm2nic"},
+                "ip_name":{"value": "[concat('ip2-',uniqueString(resourceGroup().id))]"},
+                "subnet_name":{"value":"devWebSubnet01"}
+              } 
+            },
+            "dependsOn": [
+                "minschoNet01"
+            ]
         }
     ]
 }
