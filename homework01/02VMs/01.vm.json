@@ -84,6 +84,7 @@
                             ]
                         }
                     },
+                    "customData": "[parameters('customData')]",
                     "secrets": []
                 },
                 "networkProfile": {
