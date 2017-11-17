@@ -113,8 +113,9 @@ fi
 #Start deployment
 echo "Starting deployment..."
 (
+    customData=$(cat $customDataFile|base64)
     set -x
-    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath --parameters adminUserId=$adminUserId --parameters sshKeyData=$sshKeyData --parameters customData=$(cat $customDataFile)
+    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath --parameters adminUserId=$adminUserId --parameters sshKeyData=$sshKeyData --parameters customData=$customData
 )
 
 if [ $?  == 0 ];

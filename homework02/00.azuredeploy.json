@@ -31,7 +31,7 @@
                 "adminUserId":{"value": "[parameters('adminUserId')]"},
                 "sshKeyData":{"value": "[parameters('sshKeyData')]"},
                 "nic_name":{"value": "vm0nic"},
-                "customData":{"value":"[dataUri(parameters('customData'))]"}
+                "customData":{"value":"[parameters('customData')]"}
               } 
             }
         }
