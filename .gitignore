@@ -1,4 +1,4 @@
 **/.DS_Store
 **/.terraform/
 **/00.tfm_env.sh
-**/terraform.tfstate
+**/terraform.tfstate*

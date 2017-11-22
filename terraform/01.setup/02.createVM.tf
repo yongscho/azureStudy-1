@@ -4,6 +4,26 @@ data "azurerm_resource_group" "netRG" {
   name = "minschoNetRG"
 }
 
+data "azurerm_public_ip" "nic_ip" {
+  name="ip0-pztosnpebhtt6"
+  resource_group_name="${data.azurerm_resource_group.netRG.name}"
+}
+
+#data source에는 network interface가 없음. private ip는 어떻게 알아내지?
+#data "azurerm_network_interface" "nic" {
+#  name="${var.provisionedNicName}"
+#  resource_group_name="${data.azurerm_resource_group.netRG.name}"
+#}
+
+output "public_ip" {
+  value = "${data.azurerm_public_ip.nic_ip.ip_address}"
+}
+
+#private ip를 어떻게 알아낼까? 아래처럼 하면 안됨
+#output "private_ip" {
+#  value = "${azurerm_virtual_machine.vm0}"
+#}
+
 variable "provisionedNicName" {
     default = "vm0nic"
 }
