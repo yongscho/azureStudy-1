@@ -59,7 +59,7 @@
     },
     "resources": [
         {
-            "comments": "테스트용",
+            "comments": "**[variables('sshKeyData')]**",
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[parameters('vm_name')]",
             "apiVersion": "2017-03-30",

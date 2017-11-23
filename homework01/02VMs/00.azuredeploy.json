@@ -32,9 +32,9 @@
               "parameters": { 
                 "vm_name":{"value": "vm0"},
                 "adminUserId":{"value": "[parameters('adminUserId')]"},
-                "vaultResourceGroup" : "[parameters('vaultResourceGroup')]",
-                "vaultName" : "[parameters('vaultName')]",
-                "secretName" : "[parameters('secretName')]",
+                "vaultResourceGroup" : {"value": "[parameters('vaultResourceGroup')]"},
+                "vaultName" : {"value": "[parameters('vaultName')]"},
+                "secretName" : {"value": "[parameters('secretName')]"},
                 "nic_name":{"value": "vm0nic"},
                 "customData":{"value":""}
               }
