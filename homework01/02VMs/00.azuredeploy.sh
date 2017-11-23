@@ -6,7 +6,7 @@ IFS=$'\n\t'
 # -o: prevents errors in a pipeline from being masked
 # IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
 
-usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> -u <adminUserId> -r <vaultResourceGroup> -v <vaultName> -s <secretName> 1>&2; exit 1; }
+usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> -u <adminUserId> -r <vaultResourceGroup> -v <vaultName> -s <secretName>" 1>&2; exit 1; }
 
 declare subscriptionId="7b13dc94-2b54-4cdf-a247-bbdebdb97f4f"
 declare resourceGroupName=""
@@ -64,16 +64,19 @@ fi
 if [[ -z "$vaultResourceGroup" ]]; then
     echo "Key Vault Resource Group:"
     read vaultResourceGroup
+    [[ "${vaultResourceGroup:?}" ]]
 fi
 
 if [[ -z "$vaultName" ]]; then
     echo "Vault Name:"
     read vaultName
+    [[ "${vaultName:?}" ]]
 fi
 
 if [[ -z "$secretName" ]]; then
-    echo "secretName in which public key resides :"
+    echo "secretName which public key resides :"
     read secretName
+    [[ "${secretName:?}" ]]
 fi
 
 #templateFile Path - template file to be used
@@ -92,9 +95,10 @@ if [ ! -f "$parametersFilePath" ]; then
     exit 1
 fi
 
-if [ -z "$resourceGroupName" ] || [ -z "$adminUserId" ] || [ -z "$sshKeyData" ] || [ -z "$vaultResourceGroup" ] || [ -z "$vaultName" ] || [ -z "$secretName" ]; then
+if [ -z "$resourceGroupName" ] || [ -z "$adminUserId" ] || [ -z "$vaultResourceGroup" ] || [ -z "$vaultName" ] || [ -z "$secretName" ]; then
     echo "Some required parameters are missing"
     usage
+    exit 1
 fi
 
 #login to azure using your credentials
@@ -123,7 +127,8 @@ fi
 echo "Starting deployment..."
 (
     set -x
-    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath \
+    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath \
+    --parameters @$parametersFilePath \
     --parameters adminUserId=$adminUserId \
     --parameters vaultResourceGroup=$vaultResourceGroup \
     --parameters vaultName=$vaultName \
