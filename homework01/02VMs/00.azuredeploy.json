@@ -16,15 +16,7 @@
         }
     },
     "variables": {
-        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/spWithVault/homework01/02VMs/",
-        "sshKeyData" : {
-          "reference" : {
-              "keyVault" : {
-                  "id": "[resourceId(subscription().subscriptionId,  parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
-              },
-              "secretName": "[parameters('secretName')]"
-          }
-      }
+        "repoUri" : "https://raw.githubusercontent.com/msjo66/azureStudy/spWithVault/homework01/02VMs/"
     },
     "resources": [
         {
@@ -40,9 +32,16 @@
               "parameters": { 
                 "vm_name":{"value": "vm0"},
                 "adminUserId":{"value": "[parameters('adminUserId')]"},
-                "sshKeyData":{"value": "[variables('sshKeyData')]"},
-                "nic_name":{"value": "vm0nic"},
-                "customData":{"value":""}
+                "customData":{"value": "null"},
+                "sshKeyData":{
+                  "reference" : {
+                    "keyVault" : {
+                        "id": "[resourceId(subscription().subscriptionId,  parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('secretName')]"
+                  }
+                },
+                "nic_name":{"value": "vm0nic"}
               }
             }
         }
