@@ -6,17 +6,19 @@ IFS=$'\n\t'
 # -o: prevents errors in a pipeline from being masked
 # IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
 
-usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> -u <adminUserId> -k <sshKeyData>" 1>&2; exit 1; }
+usage() { echo "Usage: $0 -g <resourceGroupName> -n <deploymentName> -u <adminUserId> -r <vaultResourceGroup> -v <vaultName> -s <secretName> 1>&2; exit 1; }
 
 declare subscriptionId="7b13dc94-2b54-4cdf-a247-bbdebdb97f4f"
 declare resourceGroupName=""
 declare resourceGroupLocation=koreacentral
 declare deploymentName=""
 declare adminUserId=""
-declare sshKeyData=""
+declare vaultResourceGroup=""
+declare vaultName=""
+declare secretName=""
 
 # Initialize parameters specified from command line
-while getopts ":g:n:u:k:" arg; do
+while getopts ":g:n:u:r:v:s:" arg; do
     case "${arg}" in
         g)
             resourceGroupName=${OPTARG}
@@ -27,8 +29,14 @@ while getopts ":g:n:u:k:" arg; do
         u)
             adminUserId=${OPTARG}
             ;;
-        k)
-            sshKeyData=${OPTARG}
+        r)
+            vaultResourceGroup=${OPTARG}
+            ;;
+        v)
+            vaultName=${OPTARG}
+            ;;
+        s)
+            secretName=${OPTARG}
             ;;
         esac
 done
@@ -53,9 +61,19 @@ if [[ -z "$deploymentName" ]]; then
     [[ "${deploymentName:?}" ]]
 fi
 
-if [[ -z "$sshKeyData" ]]; then
-    echo "sshKeyData:"
-    read sshKeyData
+if [[ -z "$vaultResourceGroup" ]]; then
+    echo "Key Vault Resource Group:"
+    read vaultResourceGroup
+fi
+
+if [[ -z "$vaultName" ]]; then
+    echo "Vault Name:"
+    read vaultName
+fi
+
+if [[ -z "$secretName" ]]; then
+    echo "secretName in which public key resides :"
+    read secretName
 fi
 
 #templateFile Path - template file to be used
@@ -74,8 +92,8 @@ if [ ! -f "$parametersFilePath" ]; then
     exit 1
 fi
 
-if [ -z "$resourceGroupName" ] || [ -z "$adminUserId" ] || [ -z "$sshKeyData" ]; then
-    echo "Either one of resourceGroupName, sshKeyData is empty"
+if [ -z "$resourceGroupName" ] || [ -z "$adminUserId" ] || [ -z "$sshKeyData" ] || [ -z "$vaultResourceGroup" ] || [ -z "$vaultName" ] || [ -z "$secretName" ]; then
+    echo "Some required parameters are missing"
     usage
 fi
 
@@ -105,7 +123,11 @@ fi
 echo "Starting deployment..."
 (
     set -x
-    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath --parameters adminUserId=$adminUserId --parameters sshKeyData=$sshKeyData
+    az group deployment create --name $deploymentName --resource-group $resourceGroupName --template-file $templateFilePath --parameters @$parametersFilePath \
+    --parameters adminUserId=$adminUserId \
+    --parameters vaultResourceGroup=$vaultResourceGroup \
+    --parameters vaultName=$vaultName \
+    --parameters secretName=$secretName
 )
 
 if [ $?  == 0 ];

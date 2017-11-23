@@ -5,7 +5,13 @@
         "adminUserId": {
           "type": "string"
         },
-        "sshKeyData": {
+        "vaultResourceGroup" : {
+          "type": "string"
+        },
+        "vaultName" : {
+          "type": "string"
+        },
+        "secretName" : {
           "type": "string"
         }
     },
@@ -26,7 +32,9 @@
               "parameters": { 
                 "vm_name":{"value": "vm0"},
                 "adminUserId":{"value": "[parameters('adminUserId')]"},
-                "sshKeyData":{"value": "[parameters('sshKeyData')]"},
+                "vaultResourceGroup" : "[parameters('vaultResourceGroup')]",
+                "vaultName" : "[parameters('vaultName')]",
+                "secretName" : "[parameters('secretName')]",
                 "nic_name":{"value": "vm0nic"},
                 "customData":{"value":""}
               } 
@@ -45,7 +53,9 @@
             "parameters": { 
               "vm_name":{"value": "vm1"},
               "adminUserId":{"value": "[parameters('adminUserId')]"},
-              "sshKeyData":{"value": "[parameters('sshKeyData')]"},
+              "vaultResourceGroup" : "[parameters('vaultResourceGroup')]",
+              "vaultName" : "[parameters('vaultName')]",
+              "secretName" : "[parameters('secretName')]",
               "nic_name":{"value": "vm1nic"},
               "customData":{"value":""}
             } 
@@ -64,7 +74,9 @@
           "parameters": { 
             "vm_name":{"value": "vm2"},
             "adminUserId":{"value": "[parameters('adminUserId')]"},
-            "sshKeyData":{"value": "[parameters('sshKeyData')]"},
+            "vaultResourceGroup" : "[parameters('vaultResourceGroup')]",
+            "vaultName" : "[parameters('vaultName')]",
+            "secretName" : "[parameters('secretName')]",
             "nic_name":{"value": "vm2nic"},
             "customData":{"value":""}
           } 
