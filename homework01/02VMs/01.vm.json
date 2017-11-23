@@ -1,3 +1,4 @@
+
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
@@ -29,13 +30,7 @@
         "adminUserId" : {
             "type": "string"
         },
-        "vaultResourceGroup" : {
-            "type": "string"
-        },
-        "vaultName" : {
-            "type": "string"
-        },
-        "secretName" : {
+        "sshKeyData" : {
             "type": "string"
         },
         "nic_name": {
@@ -47,19 +42,11 @@
     },
     "variables": {
         "netRGName":"minschoNetRG",
-        "subscriptionId":"[subscription().subscriptionId]",
-        "sshKeyData" : {
-            "reference" : {
-                "keyVault" : {
-                    "id": "[resourceId(subscription().subscriptionId,  parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
-                },
-                "secretName": "[parameters('secretName')]"
-            }
-        }
+        "subscriptionId":"[subscription().subscriptionId]"
     },
     "resources": [
         {
-            "comments": "**[variables('sshKeyData')]**",
+            "comments": "테스트용",
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[parameters('vm_name')]",
             "apiVersion": "2017-03-30",
@@ -93,7 +80,7 @@
                             "publicKeys": [
                                 {
                                     "path": "[concat('/home/',parameters('adminUserId'),'/.ssh/authorized_keys')]",
-                                    "keyData": "[variables('sshKeyData')]"
+                                    "keyData": "[parameters('sshKeyData')]"
                                 }
                             ]
                         }
