@@ -98,8 +98,8 @@
         }
     ],
     "outputs": {
-        "networkInterface":{
-            "value": "[reference(concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), '/providers/Microsoft.Network/networkInterfaces/', parameters('nic_name')),'2017-06-01')]",
+        "publicIPAddress":{
+            "value": "[reference(concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), '/providers/Microsoft.Network/networkInterfaces/', parameters('nic_name')),'2017-06-01').ipConfigurations[0].properties.publicIPAddress]",
             "type": "object"
         }
     }
