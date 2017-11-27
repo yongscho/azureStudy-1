@@ -205,7 +205,10 @@
             "properties": {
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
-                "idleTimeoutInMinutes": 4
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings" :{
+                    "domainNameLabel": "[concat('ip', copyIndex(),'-', resourceGroup().id)]"
+                }
             },
             "copy": {
                 "name": "ipcopy",
