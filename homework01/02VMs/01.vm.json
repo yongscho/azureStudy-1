@@ -96,5 +96,11 @@
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "networkInterface":{
+            "value": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', variables('netRGName'), '/providers/Microsoft.Network/networkInterfaces/', parameters('nic_name'))]",
+            "type": "object"
+        }
+    }
 }
