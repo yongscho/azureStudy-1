@@ -207,7 +207,7 @@
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
                 "dnsSettings" :{
-                    "domainNameLabel": "[concat('ip', copyIndex(),'-', resourceGroup().name)]"
+                    "domainNameLabel": "[concat('ip', copyIndex(),'-', toLower(resourceGroup().name))]"
                 }
             },
             "copy": {
