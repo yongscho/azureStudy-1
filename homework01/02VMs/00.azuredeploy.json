@@ -28,7 +28,7 @@
                 "adminUserId":{"value": "[parameters('adminUserId')]"},
                 "sshKeyData":{"value": "[parameters('sshKeyData')]"},
                 "nic_name":{"value": "vm0nic"},
-                "customData":{"value":""}
+                "customData":{"value":"null"}
               } 
             }
         },
@@ -47,7 +47,7 @@
               "adminUserId":{"value": "[parameters('adminUserId')]"},
               "sshKeyData":{"value": "[parameters('sshKeyData')]"},
               "nic_name":{"value": "vm1nic"},
-              "customData":{"value":""}
+              "customData":{"value":"null"}
             } 
           }
       },
@@ -66,7 +66,7 @@
             "adminUserId":{"value": "[parameters('adminUserId')]"},
             "sshKeyData":{"value": "[parameters('sshKeyData')]"},
             "nic_name":{"value": "vm2nic"},
-            "customData":{"value":""}
+            "customData":{"value":"null"}
           } 
         }
       }
