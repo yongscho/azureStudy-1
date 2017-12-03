@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+  - name : Add David Ortiz User to the system
+    user :
+      name: dortiz
+      groups: dba
+      comment: "David Ortiz has entered the building"
+    become: true
