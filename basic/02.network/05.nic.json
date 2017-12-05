@@ -33,7 +33,6 @@
                     {
                         "name": "[concat('ipconfig',parameters('nic_name'))]",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pubip_name'))]"

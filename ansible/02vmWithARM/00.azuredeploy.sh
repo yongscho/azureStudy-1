@@ -154,6 +154,12 @@ then
     FQDN=`az network public-ip show --ids $IP_RES_ID| jq -r '.dnsSettings.fqdn'`
     echo "fqdn=$FQDN"
 #### /etc/ansible/hosts에 넣기 위해서 hosts파일을 write권한은 주어야 함.
-    echo "$FQDN ansible_ssh_private_key_file=/Users/minsoojo/.ssh/minscho_ebay.com.pem">> /etc/ansible/hosts
+    if grep -Fq "$FQDN" /etc/ansible/hosts;
+    then
+        echo "already this vm is in ansible default inventory. Skipping.."
+    else
+        echo "$FQDN ansible_ssh_private_key_file=/Users/minsoojo/.ssh/minscho_ebay.com.pem">> /etc/ansible/hosts
+    fi
+    
     ansible all -m ping
 fi
