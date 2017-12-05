@@ -87,7 +87,7 @@
                                 "id": "[concat('/subscriptions/',variables('subscriptionId'),'/resourceGroups/',parameters('netRGName'),'/providers/Microsoft.Network/virtualNetworks/',parameters('vnetName'),'/subnets/',parameters('subnetName'))]"
                               },
                               "publicIPAddressconfiguration": {
-                                "name": "publicip",
+                                "name": "myset01",
                                 "properties": {
                                 "idleTimeoutInMinutes": 10,
                                   "dnsSettings": {
