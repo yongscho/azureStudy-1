@@ -38,3 +38,9 @@ az group deployment create \
 --resource-group $resourceGroupName \
 --template-file 02.azuredeploy.json \
 --parameters @02.azuredeploy.parameters.json
+
+# ansible inventory에 넣으려면..
+pemFilePath=" ansible_ssh_private_key_file=/Users/minsoojo/.ssh/minscho_ebay.com.pem"
+az vmss list-instance-public-ips \
+--resource-group minschoTestRG01 \
+--name mySet01 |jq -r '.[].dnsSettings.fqdn' | sed "s|$|$pemFilePath|" >> /etc/ansible/hosts
