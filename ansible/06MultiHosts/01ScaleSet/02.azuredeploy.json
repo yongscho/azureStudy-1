@@ -34,6 +34,9 @@
       },
       "subnetName": {
           "type": "string"
+      },
+      "scalesetDnsName": {
+        "type": "string"
       }
     },
     "variables": {
@@ -66,7 +69,8 @@
                 "netRGName":{"value": "[parameters('netRGName')]"},
                 "nicName":{"value": "[parameters('nicName')]"},
                 "vnetName":{"value": "[parameters('vnetName')]"},
-                "subnetName":{"value": "[parameters('subnetName')]"}
+                "subnetName":{"value": "[parameters('subnetName')]"},
+                "scalesetDnsName":{"value": "[parameters('scalesetDnsName')]"}
               } 
             }
         }

@@ -29,6 +29,9 @@
       },
       "subnetName": {
           "type": "string"
+      },
+      "scalesetDnsName": {
+        "type": "string"
       }
     },
     "variables": {
@@ -75,12 +78,22 @@
                       "name": "[parameters('nicName')]",
                       "properties": {
                         "primary": true,
+                        "enableAcceleratedNetworking" : false,
                         "ipConfigurations": [
                           {
                             "name": "myIpConfig",
                             "properties": {
                               "subnet": {
                                 "id": "[concat('/subscriptions/',variables('subscriptionId'),'/resourceGroups/',parameters('netRGName'),'/providers/Microsoft.Network/virtualNetworks/',parameters('vnetName'),'/subnets/',parameters('subnetName'))]"
+                              },
+                              "publicIPAddressconfiguration": {
+                                "name": "publicip",
+                                "properties": {
+                                "idleTimeoutInMinutes": 10,
+                                  "dnsSettings": {
+                                    "domainNameLabel": "[parameters('scalesetDnsName')]"
+                                  }
+                                }
                               }
                             }
                           }
