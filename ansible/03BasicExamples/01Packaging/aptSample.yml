@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- hosts: webserver
   tasks:
   - name: Update repositories cache and install "foo" package
     apt:
-      name: foo
+      name: apache
+      state: installed
       update_cache: yes
 #
 #- name: Remove "foo" package

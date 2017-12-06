@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: webserver
   tasks:
   - name: install the latest version of Apache
     yum:
@@ -12,7 +12,7 @@
       state: started
       # 아래 enabled : true는 boot시 자동 시작. boot시 자동시작은 어떻게? 
       # /etc/systemd/system/multi-user.target.wants 에 /usr/lib/systemd/system/httpd.service 가 link로 걸림
-      enabled: true
+      enabled: false
     become: true
 #- name: remove the Apache package
 #  yum:
