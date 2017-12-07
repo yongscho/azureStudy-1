@@ -1,6 +1,6 @@
 # File name : HelloDevOpsWorld.yml
 ---
-- hosts: all
+- hosts: ip0*
   tasks:
   - name: "name 변수 설정"
     set_fact:
