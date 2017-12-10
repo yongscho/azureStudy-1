@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: ip0*
   tasks:
     - name : "샘플 index.html 배포"
       template:
