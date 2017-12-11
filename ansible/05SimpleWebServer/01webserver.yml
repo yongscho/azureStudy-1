@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: ip0*
   tasks:
     - name: "Apache 설치"
       yum:

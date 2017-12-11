@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: ip0*
   tasks:
     - name: "EPEL 설치"
       yum:
