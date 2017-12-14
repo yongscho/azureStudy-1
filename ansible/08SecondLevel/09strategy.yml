@@ -1,7 +1,7 @@
 ---
 - hosts: all
   strategy: free
-  serial: 10
+#  serial: 10
 #  serial: "33%"
 #  max_fail_percentage: 30%
   vars:

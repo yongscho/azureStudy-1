@@ -7,7 +7,7 @@
           notify: run me even after an error
         - command: /bin/false
       rescue:
-        - name: make sure all handlers run
+        - debug: msg= 'make sure all handlers run'
           meta: flush_handlers
   handlers:
     - name: run me even after an error
